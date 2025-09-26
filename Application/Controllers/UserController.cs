@@ -52,7 +52,7 @@ namespace Application.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("{id}/email")]
         public HttpResponseMessage UpdateEmail(int id, EmailUpdateDTO obj)
         {
@@ -77,7 +77,7 @@ namespace Application.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("{id}/password")]
         public HttpResponseMessage UpdatePassword(int id, PasswordUpdateDTO obj)
         {
@@ -105,7 +105,7 @@ namespace Application.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("{id}/username")]
         public HttpResponseMessage UpdateUsername(int id, UsernameUpdateDTO obj)
         {

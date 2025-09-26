@@ -28,11 +28,11 @@ namespace DAL.Repos
 
         public bool Delete(int id)
         {
-            var user = db.Users.Find(id);
-            if (user == null)
+            var existingUser = db.Users.Find(id);
+            if (existingUser == null)
                 return false;
 
-            db.Users.Remove(user);
+            db.Users.Remove(existingUser);
             return db.SaveChanges() > 0;
         }
 
