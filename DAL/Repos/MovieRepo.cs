@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using DAL.Interfaces;
 
 namespace DAL.Repos
 {
-    internal class MovieRepo : IRepo<Movie, int, bool>
+    internal class MovieRepo : IRepo<Movie, int, bool>, IMovieFeature
     {
         BMSContext db;
 
@@ -43,6 +44,45 @@ namespace DAL.Repos
         public Movie Get(int id)
         {
             return db.Movies.Find(id);
+        }
+
+        // Returns all showtimes for all movies at a specific cinema location
+        public List<Showtime> GetShowtimesByCinema(int cinemaId)
+        {
+            var showtimes = db
+                .Showtimes.Include(s => s.Screen)
+                .Include(s => s.Movie)
+                .Where(s => s.Screen.CinemaId == cinemaId && s.StartTime >= DateTime.Now)
+                .OrderBy(s => s.StartTime)
+                .ToList();
+            return showtimes;
+        }
+
+        // Returns showtimes for a specific movie at a specific cinema location
+        public List<Showtime> GetShowtimesForMovieAtCinema(int movieId, int cinemaId)
+        {
+            return db
+                .Showtimes.Include(s => s.Screen)
+                .Include(s => s.Movie)
+                .Where(s =>
+                    s.MovieId == movieId
+                    && s.Screen.CinemaId == cinemaId
+                    && s.StartTime >= DateTime.Now
+                )
+                .OrderBy(s => s.StartTime)
+                .ToList();
+        }
+
+        // Returns showtimes grouped by movie
+        public Dictionary<Movie, List<Showtime>> GetShowtimesGroupedByMovie(int cinemaId)
+        {
+            var showtimes = db
+                .Showtimes.Include(s => s.Screen)
+                .Include(s => s.Movie)
+                .Where(s => s.Screen.CinemaId == cinemaId && s.StartTime >= DateTime.Now)
+                .ToList();
+
+            return showtimes.GroupBy(s => s.Movie).ToDictionary(g => g.Key, g => g.ToList());
         }
 
         public bool Update(Movie obj)

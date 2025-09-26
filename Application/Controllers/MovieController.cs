@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Web.Http;
+using System.Web.Management;
 using BLL.DTOs;
 using BLL.Services;
 
@@ -94,6 +96,75 @@ namespace Application.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Movie not found!");
                 }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        // Returns all showtimes for all movies at a specific cinema location
+        [HttpGet]
+        [Route("cinema/{cinemaId}/showtimes")]
+        public HttpResponseMessage GetShowtimesByCinema(int cinemaId)
+        {
+            try
+            {
+                var showtimes = MovieService.GetShowtimesByCinema(cinemaId);
+                if (showtimes.Count == 0)
+                {
+                    return Request.CreateResponse(
+                        HttpStatusCode.NoContent,
+                        "No showtimes available for this cinema"
+                    );
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, showtimes);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        // Returns showtimes for a specific movie at a specific cinema location
+        [HttpGet]
+        [Route("cinema/{cinemaId}/movie/{movieId}/showtimes")]
+        public HttpResponseMessage GetShowtimesForMovieAtCinema(int cinemaId, int movieId)
+        {
+            try
+            {
+                var showtimes = MovieService.GetShowtimesForMovieAtCinema(movieId, cinemaId);
+                if (showtimes.Count == 0)
+                {
+                    return Request.CreateResponse(
+                        HttpStatusCode.NoContent,
+                        "No showtimes available for this movie at this cinema"
+                    );
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, showtimes);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        // Returns showtimes grouped by movie
+        [HttpGet]
+        [Route("cinema/{cinemaId}/showtimes/grouped")]
+        public HttpResponseMessage GetShowtimesGroupedByMovie(int cinemaId)
+        {
+            try
+            {
+                var groupedShowtimes = MovieService.GetShowtimesGroupedByMovie(cinemaId);
+                if (groupedShowtimes.Count == 0)
+                {
+                    return Request.CreateResponse(
+                        HttpStatusCode.NoContent,
+                        "No showtimes available at this cinema"
+                    );
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, groupedShowtimes);
             }
             catch (Exception ex)
             {

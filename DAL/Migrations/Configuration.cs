@@ -20,7 +20,7 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            // Seed Users
+            ////Seed Users
             //context.Users.AddOrUpdate(
             //    u => u.Email,
             //    new User
@@ -264,8 +264,10 @@
             //context.SaveChanges();
 
             //// Seed Showtimes
-            //var today = DateTime.Today;
-            //var tomorrow = today.AddDays(1);
+            //var oneMonthFromNow = DateTime.Today.AddMonths(1);
+            //var nextDay = oneMonthFromNow.AddDays(1);
+            //var thirdDay = oneMonthFromNow.AddDays(2);
+            //var fourthDay = oneMonthFromNow.AddDays(3);
 
             //context.Showtimes.AddOrUpdate(
             //    st => new
@@ -274,39 +276,109 @@
             //        st.ScreenId,
             //        st.StartTime,
             //    },
+            //    // Titanic showtimes
             //    new Showtime
             //    {
             //        MovieId = titanic.MovieId,
             //        ScreenId = screen1.ScreenId,
-            //        StartTime = today.AddHours(14), // 2:00 PM
-            //        EndTime = today.AddHours(14).AddMinutes(194), // Runtime + buffer
+            //        StartTime = oneMonthFromNow.AddHours(14), // 2:00 PM
+            //        EndTime = oneMonthFromNow.AddHours(14).AddMinutes(194), // Runtime + buffer
             //        Price = 12.99f,
+            //    },
+            //    new Showtime
+            //    {
+            //        MovieId = titanic.MovieId,
+            //        ScreenId = screen1.ScreenId,
+            //        StartTime = oneMonthFromNow.AddHours(19), // 7:00 PM
+            //        EndTime = oneMonthFromNow.AddHours(19).AddMinutes(194),
+            //        Price = 12.99f,
+            //    },
+            //    new Showtime
+            //    {
+            //        MovieId = titanic.MovieId,
+            //        ScreenId = screen2.ScreenId,
+            //        StartTime = nextDay.AddHours(15), // 3:00 PM next day
+            //        EndTime = nextDay.AddHours(15).AddMinutes(194),
+            //        Price = 12.99f,
+            //    },
+            //    // The Shawshank Redemption showtimes
+            //    new Showtime
+            //    {
+            //        MovieId = shawshank.MovieId,
+            //        ScreenId = screen1.ScreenId,
+            //        StartTime = nextDay.AddHours(14), // 2:00 PM next day
+            //        EndTime = nextDay.AddHours(14).AddMinutes(142),
+            //        Price = 10.99f,
+            //    },
+            //    new Showtime
+            //    {
+            //        MovieId = shawshank.MovieId,
+            //        ScreenId = screen2.ScreenId,
+            //        StartTime = oneMonthFromNow.AddHours(18), // 6:00 PM
+            //        EndTime = oneMonthFromNow.AddHours(18).AddMinutes(142),
+            //        Price = 10.99f,
             //    },
             //    new Showtime
             //    {
             //        MovieId = shawshank.MovieId,
             //        ScreenId = screen1.ScreenId,
-            //        StartTime = today.AddHours(19), // 7:00 PM
-            //        EndTime = today.AddHours(19).AddMinutes(142),
+            //        StartTime = thirdDay.AddHours(20), // 8:00 PM third day
+            //        EndTime = thirdDay.AddHours(20).AddMinutes(142),
             //        Price = 10.99f,
+            //    },
+            //    // Avengers: Endgame showtimes
+            //    new Showtime
+            //    {
+            //        MovieId = endgame.MovieId,
+            //        ScreenId = screen1.ScreenId,
+            //        StartTime = oneMonthFromNow.AddHours(10), // 10:00 AM
+            //        EndTime = oneMonthFromNow.AddHours(10).AddMinutes(181),
+            //        Price = 15.99f,
             //    },
             //    new Showtime
             //    {
             //        MovieId = endgame.MovieId,
             //        ScreenId = screen2.ScreenId,
-            //        StartTime = tomorrow.AddHours(15), // 3:00 PM tomorrow
-            //        EndTime = tomorrow.AddHours(15).AddMinutes(181),
+            //        StartTime = nextDay.AddHours(19), // 7:00 PM next day
+            //        EndTime = nextDay.AddHours(19).AddMinutes(181),
             //        Price = 15.99f,
+            //    },
+            //    new Showtime
+            //    {
+            //        MovieId = endgame.MovieId,
+            //        ScreenId = screen1.ScreenId,
+            //        StartTime = fourthDay.AddHours(16), // 4:00 PM fourth day
+            //        EndTime = fourthDay.AddHours(16).AddMinutes(181),
+            //        Price = 15.99f,
+            //    },
+            //    // Forrest Gump showtimes
+            //    new Showtime
+            //    {
+            //        MovieId = forrestGump.MovieId,
+            //        ScreenId = screen2.ScreenId,
+            //        StartTime = oneMonthFromNow.AddHours(16), // 4:00 PM
+            //        EndTime = oneMonthFromNow.AddHours(16).AddMinutes(142),
+            //        Price = 11.99f,
+            //    },
+            //    new Showtime
+            //    {
+            //        MovieId = forrestGump.MovieId,
+            //        ScreenId = screen1.ScreenId,
+            //        StartTime = thirdDay.AddHours(14), // 2:00 PM third day
+            //        EndTime = thirdDay.AddHours(14).AddMinutes(142),
+            //        Price = 11.99f,
             //    },
             //    new Showtime
             //    {
             //        MovieId = forrestGump.MovieId,
             //        ScreenId = screen2.ScreenId,
-            //        StartTime = tomorrow.AddHours(20), // 8:00 PM tomorrow
-            //        EndTime = tomorrow.AddHours(20).AddMinutes(142),
+            //        StartTime = fourthDay.AddHours(20), // 8:00 PM fourth day
+            //        EndTime = fourthDay.AddHours(20).AddMinutes(142),
             //        Price = 11.99f,
             //    }
             //);
+
+            //context.SaveChanges();
 
             //// Seed Promo Codes
             //context.PromoCodes.AddOrUpdate(

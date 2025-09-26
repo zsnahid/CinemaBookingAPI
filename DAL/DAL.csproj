@@ -65,11 +65,16 @@
     <Compile Include="EF\Tables\Showtime.cs" />
     <Compile Include="EF\Tables\Ticket.cs" />
     <Compile Include="EF\Tables\User.cs" />
+    <Compile Include="Interfaces\IMovieFeature.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Interfaces\IUserFeature.cs" />
     <Compile Include="Migrations\202509241358280_CreatedDb.cs" />
     <Compile Include="Migrations\202509241358280_CreatedDb.Designer.cs">
       <DependentUpon>202509241358280_CreatedDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202509261805099_AddedMultipleShowtimes.cs" />
+    <Compile Include="Migrations\202509261805099_AddedMultipleShowtimes.Designer.cs">
+      <DependentUpon>202509261805099_AddedMultipleShowtimes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +91,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202509241358280_CreatedDb.resx">
       <DependentUpon>202509241358280_CreatedDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202509261805099_AddedMultipleShowtimes.resx">
+      <DependentUpon>202509261805099_AddedMultipleShowtimes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

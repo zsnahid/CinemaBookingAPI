@@ -25,5 +25,10 @@ namespace DAL
         {
             return new MovieRepo();
         }
+
+        public static IMovieFeature MovieFeature()
+        {
+            return new MovieRepo();
+        }
     }
 }

@@ -17,6 +17,16 @@ namespace BLL.Services
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Movie, MovieDTO>().ReverseMap();
+                cfg.CreateMap<Showtime, ShowtimeDTO>()
+                    .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
+                    .ForMember(
+                        dest => dest.ScreenNumber,
+                        opt => opt.MapFrom(src => src.Screen.ScreenNumber)
+                    )
+                    .ForMember(
+                        dest => dest.CinemaName,
+                        opt => opt.MapFrom(src => src.Screen.Cinema.Name)
+                    );
             });
             return new Mapper(config);
         }
@@ -48,6 +58,43 @@ namespace BLL.Services
         public static bool Delete(int id)
         {
             return DataAccessFactory.MovieData().Delete(id);
+        }
+
+        // Returns all showtimes for all movies at a specific cinema location
+        public static List<ShowtimeDTO> GetShowtimesByCinema(int cinemaId)
+        {
+            var showtimes = DataAccessFactory.MovieFeature().GetShowtimesByCinema(cinemaId);
+            return GetMapper().Map<List<ShowtimeDTO>>(showtimes);
+        }
+
+        // Returns showtimes for a specific movie at a specific cinema location
+        public static List<ShowtimeDTO> GetShowtimesForMovieAtCinema(int movieId, int cinemaId)
+        {
+            var showtimesByMovie = DataAccessFactory
+                .MovieFeature()
+                .GetShowtimesForMovieAtCinema(movieId, cinemaId);
+            return GetMapper().Map<List<ShowtimeDTO>>(showtimesByMovie);
+        }
+
+        // Returns showtimes grouped by movie
+        public static List<MovieShowtimesDTO> GetShowtimesGroupedByMovie(int cinemaId)
+        {
+            var groupedShowtimes = DataAccessFactory
+                .MovieFeature()
+                .GetShowtimesGroupedByMovie(cinemaId);
+            var result = new List<MovieShowtimesDTO>();
+
+            foreach (var item in groupedShowtimes)
+            {
+                result.Add(
+                    new MovieShowtimesDTO
+                    {
+                        Movie = GetMapper().Map<MovieDTO>(item.Key),
+                        Showtimes = GetMapper().Map<List<ShowtimeDTO>>(item.Value),
+                    }
+                );
+            }
+            return result;
         }
     }
 }

@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="DTOs\EmailUpdateDTO.cs" />
     <Compile Include="DTOs\MovieDTO.cs" />
+    <Compile Include="DTOs\MovieShowtimesDTO.cs" />
     <Compile Include="DTOs\PasswordUpdateDTO.cs" />
+    <Compile Include="DTOs\ShowtimeDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="DTOs\UsernameUpdateDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
