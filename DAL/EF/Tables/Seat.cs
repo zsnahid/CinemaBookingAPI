@@ -22,6 +22,13 @@ namespace DAL.EF.Tables
 
         [Required]
         public int SeatNumber { get; set; }
+        public AvailabilityStatus Status { get; set; }
         public virtual Screen Screen { get; set; }
+    }
+
+    public enum AvailabilityStatus
+    {
+        AVAILABLE,
+        BOOKED,
     }
 }

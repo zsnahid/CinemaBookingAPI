@@ -30,5 +30,14 @@ namespace DAL
         {
             return new MovieRepo();
         }
+
+        public static IRepo<Booking, int, bool> BookingData()
+        {
+            return new BookingRepo();
+        }
+        public static IBookingFeature BookingFeature()
+        {
+            return new BookingRepo();
+        }
     }
 }

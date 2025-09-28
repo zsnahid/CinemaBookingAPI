@@ -44,14 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\BookingDTO.cs" />
+    <Compile Include="DTOs\BookingRequestDTO.cs" />
     <Compile Include="DTOs\EmailUpdateDTO.cs" />
     <Compile Include="DTOs\MovieDTO.cs" />
     <Compile Include="DTOs\MovieShowtimesDTO.cs" />
     <Compile Include="DTOs\PasswordUpdateDTO.cs" />
+    <Compile Include="DTOs\SeatDTO.cs" />
     <Compile Include="DTOs\ShowtimeDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="DTOs\UsernameUpdateDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BookingService.cs" />
     <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
